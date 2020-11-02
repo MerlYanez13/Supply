@@ -31,6 +31,10 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
+	side1=new Ground(650, 650,200,10);
+	side2=new Ground(550,590,10,120);
+	side3=new Ground(750,590,10,120);
+
 	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5, isStatic:true});
 	World.add(world, packageBody);
 	
@@ -49,7 +53,12 @@ function draw() {
   rectMode(CENTER);
   background(0);
   packageSprite.x= packageBody.position.x 
-  packageSprite.y= packageBody.position.y 
+  packageSprite.y= packageBody.position.y
+  
+  side1.display ();
+  side2.display ();
+  side3.display ();
+
   drawSprites();
  
 }
@@ -59,6 +68,14 @@ function keyPressed() {
     // Look at the hints in the document and understand how to make the package body fall only on
 	Matter.Body.setStatic(packageBody, false);
   }
+  if (keyCode === (LEFT_ARROW)) {
+	helicopterSprite.x-=20;
+	Matter.Body.translate(packageBody,{x:-20,y:00});
+}
+if (keyCode === (RIGHT_ARROW)) {
+	helicopterSprite.x +=20;
+	Matter.Body.translate(packageBody,{x:20,y:0});
+}
 }
 
 
